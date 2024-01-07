@@ -1,0 +1,31 @@
+.header_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 10px;
+  background-color: white;
+}
+.header_body {
+  /* position: relative; */
+  width: 1300px;
+}
+.header_items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.left_item img {
+  width: 200px;
+}
+.right_items ul li {
+  cursor: pointer;
+  color: rgb(92, 92, 92);
+  font-size: 1.2em;
+  display: inline-flex;
+  margin-left: 30px;
+  list-style: none;
+}
+ul li:hover {
+  color: black;
+}
