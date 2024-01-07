@@ -1,0 +1,9 @@
+.home_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home_wrapper img {
+  margin-top: 25px;
+  max-width: 1300px;
+}
