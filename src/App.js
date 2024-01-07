@@ -1,10 +1,13 @@
 import "./App.css";
-import Header from "./components/Header/Header";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
 
 export default function App() {
   return (
     <div className="App">
-      <Header />
+      <Routes>
+        <Route path="/" element={<Layout />}></Route>
+      </Routes>
     </div>
   );
 }
