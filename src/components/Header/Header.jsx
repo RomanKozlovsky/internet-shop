@@ -2,6 +2,7 @@ import style from "./Header.module.css";
 import header_logo from "../../assets/img/logo-header.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faEuroSign, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -9,7 +10,9 @@ export default function Header() {
       <div className={style.header_body}>
         <div className={style.header_items}>
           <div className={style.left_item}>
-            <img src={header_logo} alt="wanderlust_logo" />
+            <Link to="/">
+              <img src={header_logo} alt="wanderlust_logo" />
+            </Link>
           </div>
           <div className={style.right_items}>
             <ul>

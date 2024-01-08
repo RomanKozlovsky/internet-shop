@@ -17,6 +17,10 @@
   padding: 30px 0 30px 0;
 }
 
+.categories a {
+  text-decoration: none;
+}
+
 .categories_item_clothes {
   border-radius: 5px;
   display: flex;
