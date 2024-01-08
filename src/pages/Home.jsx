@@ -1,8 +1,5 @@
 import style from "./Home.module.css";
 import banner from "../assets/img/banner.png";
-import clothes from "../assets/img/clothes.jpg";
-import libkos from "../assets/img/libkos.jpg";
-import other from "../assets/img/other.jpg";
 
 export default function Home() {
   return (
