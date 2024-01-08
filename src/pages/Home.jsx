@@ -6,6 +6,9 @@ export default function Home() {
     <>
       <div className={style.home_wrapper}>
         <img src={banner} alt="banner_wanderlust" />
+        <div>
+          <span>categories</span>
+        </div>
       </div>
     </>
   );
