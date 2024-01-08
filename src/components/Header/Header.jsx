@@ -13,7 +13,7 @@ export default function Header() {
           </div>
           <div className={style.right_items}>
             <ul>
-              <li>+380990411013</li>
+              <li>+380 99 041 10 13</li>
               <li>
                 <FontAwesomeIcon icon={faUser} />
               </li>

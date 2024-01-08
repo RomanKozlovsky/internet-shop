@@ -8,3 +8,19 @@
 .home_wrapper img {
   max-width: 1300px;
 }
+
+.categories_list {
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 0 25px 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li img {
+  width: 300px;
+  height: 300px;
+}
