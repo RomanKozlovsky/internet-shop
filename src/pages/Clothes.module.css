@@ -1,0 +1,16 @@
+.wrapper_clothes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.clothes_item img {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.clothes_item {
+  margin: 10px 0 0 25px;
+}
