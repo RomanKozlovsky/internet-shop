@@ -13,5 +13,9 @@
 
 .clothes_item {
   margin: 10px 0 0 25px;
-  border: 1px solid red;
+}
+
+.clothes_link {
+  text-decoration: none;
+  color: black;
 }

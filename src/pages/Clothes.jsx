@@ -1,33 +1,33 @@
-import { Context } from "../App";
+import { AllProductsContext, CurrentIdContext } from "../App";
 import style from "./Clothes.module.css";
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Clothes() {
-  const [testState, setTestState] = React.useState([]);
-
-  const { testData, setTestData } = React.useContext(Context); //отримую дані з app.js на пряму, все працює
+  const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
+  const { currentProductId, setCurrentProductId } = React.useContext(CurrentIdContext);
 
   useEffect(() => {
-    console.log(testData);
     fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
       .then((response) => response.json())
-      .then((data) => setTestState(data));
+      .then((data) => setAllProducts(data));
   }, []);
 
-  function getItemId(id) {
-    console.log(id);
-  }
+
+  console.log(currentProductId)
   return (
     <>
       <div className={style.wrapper_clothes}>
-        {testState.map((item) => (
+        {allProducts.map((item) => (
           <div className={style.clothes_items} key={item.id}>
-            <div onClick={() => getItemId(item.id)} className={style.clothes_item}>
-              <img src={item.imageUrl} alt="image clothes" />
-              <p>{item.title.toUpperCase()}</p>
-              <p>
-                <b>UAH {item.price}</b>
-              </p>
+            <div className={style.clothes_item}>
+              <Link onClick={() => setCurrentProductId(item.id)} className={style.clothes_link} to={`product/${item.id}`}>
+                <img src={item.imageUrl} alt="image clothes" />
+                <p>{item.title.toUpperCase()}</p>
+                <p>
+                  <b>UAH {item.price}</b>
+                </p>
+              </Link>
             </div>
           </div>
         ))}
