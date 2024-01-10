@@ -1,0 +1,11 @@
+.product_item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.product_item img {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+}

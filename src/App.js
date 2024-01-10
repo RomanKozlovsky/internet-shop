@@ -13,6 +13,7 @@ export const AllProductsContext = React.createContext();
 export default function App() {
   const [currentProductId, setCurrentProductId] = React.useState(0);
   const [allProducts, setAllProducts] = React.useState([]);
+
   return (
     <div className="App">
       <AllProductsContext.Provider value={{ allProducts, setAllProducts }}>
@@ -21,7 +22,7 @@ export default function App() {
             <Route path="/" element={<Layout />}>
               <Route path="" element={<Home />} />
               <Route path="clothes" element={<Clothes />} />
-              <Route path="clothes/product" element={<Product />} />
+              <Route path="clothes/product/" element={<Product />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

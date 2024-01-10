@@ -10,18 +10,15 @@ export default function Clothes() {
   useEffect(() => {
     fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
       .then((response) => response.json())
-      .then((data) => setAllProducts(data));
+      .then((response) => setAllProducts(response));
   }, []);
-
-
-  console.log(currentProductId)
   return (
     <>
       <div className={style.wrapper_clothes}>
         {allProducts.map((item) => (
           <div className={style.clothes_items} key={item.id}>
             <div className={style.clothes_item}>
-              <Link onClick={() => setCurrentProductId(item.id)} className={style.clothes_link} to={`product/${item.id}`}>
+              <Link onClick={() => setCurrentProductId(item.id)} className={style.clothes_link} to={`product`}>
                 <img src={item.imageUrl} alt="image clothes" />
                 <p>{item.title.toUpperCase()}</p>
                 <p>
