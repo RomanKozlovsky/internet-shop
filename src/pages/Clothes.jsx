@@ -14,12 +14,15 @@ export default function Clothes() {
       .then((data) => setTestState(data));
   }, []);
 
+  function getItemId(id) {
+    console.log(id);
+  }
   return (
     <>
       <div className={style.wrapper_clothes}>
         {testState.map((item) => (
           <div className={style.clothes_items} key={item.id}>
-            <div className={style.clothes_item}>
+            <div onClick={() => getItemId(item.id)} className={style.clothes_item}>
               <img src={item.imageUrl} alt="image clothes" />
               <p>{item.title.toUpperCase()}</p>
               <p>
