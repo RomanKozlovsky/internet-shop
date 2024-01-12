@@ -9,25 +9,29 @@ import Product from "./pages/Product";
 
 export const CurrentIdContext = React.createContext();
 export const AllProductsContext = React.createContext();
+export const CurrentPrice = React.createContext();
 
 export default function App() {
   const [currentProductId, setCurrentProductId] = React.useState(0);
+  const [currentPrice, setCurrentPrice] = React.useState("UAH");
   const [allProducts, setAllProducts] = React.useState([]);
 
   return (
     <div className="App">
-      <AllProductsContext.Provider value={{ allProducts, setAllProducts }}>
-        <CurrentIdContext.Provider value={{ currentProductId, setCurrentProductId }}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="" element={<Home />} />
-              <Route path="clothes" element={<Clothes />} />
-              <Route path="clothes/product/" element={<Product />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </CurrentIdContext.Provider>
-      </AllProductsContext.Provider>
+      <CurrentPrice.Provider value={{ currentPrice, setCurrentPrice }}>
+        <AllProductsContext.Provider value={{ allProducts, setAllProducts }}>
+          <CurrentIdContext.Provider value={{ currentProductId, setCurrentProductId, currentPrice, setCurrentPrice }}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="" element={<Home />} />
+                <Route path="clothes" element={<Clothes />} />
+                <Route path="clothes/product/" element={<Product />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </CurrentIdContext.Provider>
+        </AllProductsContext.Provider>
+      </CurrentPrice.Provider>
     </div>
   );
 }

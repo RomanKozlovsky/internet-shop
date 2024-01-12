@@ -1,4 +1,4 @@
-import { AllProductsContext, CurrentIdContext } from "../App";
+import { AllProductsContext, CurrentIdContext, CurrentPrice } from "../App";
 import style from "./Clothes.module.css";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 export default function Clothes() {
   const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
   const { currentProductId, setCurrentProductId } = React.useContext(CurrentIdContext);
+  const { currentPrice } = React.useContext(CurrentPrice);
 
   useEffect(() => {
     fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
       .then((response) => response.json())
       .then((response) => setAllProducts(response));
   }, []);
+
   return (
     <>
       <div className={style.wrapper_clothes}>
@@ -21,9 +23,7 @@ export default function Clothes() {
               <Link onClick={() => setCurrentProductId(item.id)} className={style.clothes_link} to={`product`}>
                 <img src={item.imageUrl} alt="image clothes" />
                 <p>{item.title.toUpperCase()}</p>
-                <p>
-                  <b>UAH {item.price}</b>
-                </p>
+                <p>{currentPrice === "UAH" ? <b>{item.price} UAH</b> : <b>{(item.price / 38).toFixed(2)} USD</b>}</p>
               </Link>
             </div>
           </div>
