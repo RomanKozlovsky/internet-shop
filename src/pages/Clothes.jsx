@@ -5,13 +5,32 @@ import { Link } from "react-router-dom";
 
 export default function Clothes() {
   const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
-  const { currentProductId, setCurrentProductId } = React.useContext(CurrentIdContext);
+  const { setCurrentProductId } = React.useContext(CurrentIdContext);
   const { currentPrice } = React.useContext(CurrentPrice);
+  const USD = [];
+
+  function priceConverter(res) {
+    res.forEach((element) => {
+      USD.push((element.price / 38).toFixed(2));
+    });
+    console.log(USD);
+    console.log(allProducts);
+  }
 
   useEffect(() => {
     fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
-      .then((response) => response.json())
-      .then((response) => setAllProducts(response));
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          return res;
+        } else {
+          let error = new Error(res.statusText);
+          error.response = res;
+          throw error;
+        }
+      })
+      .then((res) => res.json())
+      .then((res) => (currentPrice === "UAH" ? setAllProducts(res) : priceConverter(res)))
+      .catch((e) => alert("Помилка отримання даних з серверу"));
   }, []);
 
   return (
