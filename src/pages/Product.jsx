@@ -58,7 +58,7 @@ export default function Product() {
               <div onClick={() => setCountProduct(countProduct - 1)} className={style.countProduct_btn}>
                 -
               </div>
-              <div className={style.countProduct_counter}>{countProduct}</div>
+                <div className={style.countProduct_counter}>{countProduct}</div>
               <div onClick={() => setCountProduct(countProduct + 1)} className={style.countProduct_btn}>
                 +
               </div>
