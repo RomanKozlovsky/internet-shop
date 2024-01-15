@@ -7,14 +7,16 @@ import banner from "../../assets/img/banner.png";
 export default function Layout() {
   return (
     <div className={style.wrapper}>
-      <div className={style.header}></div>
-      <Header />
-      <div className={style.main}>
+      <header className={style.header}>
+        <Header />
+      </header>
+      <main className={style.main}>
         <img className={style.banner_home} src={banner} alt="banner_wanderlust" />
         <Outlet />
-      </div>
-      <div className={style.footer}></div>
-      <Footer />
+      </main>
+      <footer className={style.footer}>
+        <Footer />
+      </footer>
     </div>
   );
 }

@@ -13,8 +13,6 @@ export default function Clothes() {
     res.forEach((element) => {
       USD.push((element.price / 38).toFixed(2));
     });
-    console.log(USD);
-    console.log(allProducts);
   }
 
   useEffect(() => {
