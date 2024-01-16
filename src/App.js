@@ -13,7 +13,7 @@ export const CurrentPrice = React.createContext();
 export const CurrentSize = React.createContext();
 
 export default function App() {
-  const [currentProductId, setCurrentProductId] = React.useState(0);
+  const [currentProductId, setCurrentProductId] = React.useState();
   const [currentPrice, setCurrentPrice] = React.useState("UAH");
   const [currentSize, setCurrentSize] = React.useState();
   const [allProducts, setAllProducts] = React.useState([]);
@@ -25,10 +25,10 @@ export default function App() {
           <AllProductsContext.Provider value={{ allProducts, setAllProducts }}>
             <CurrentIdContext.Provider value={{ currentProductId, setCurrentProductId, currentPrice, setCurrentPrice }}>
               <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="" element={<Layout />}>
                   <Route path="" element={<Home />} />
-                  <Route path="clothes" element={<Clothes />} />
-                  <Route path="clothes/product/" element={<Product />} />
+                  <Route path="/clothes" element={<Clothes />} />
+                  <Route path={`/clothes/:id`} element={<Product />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

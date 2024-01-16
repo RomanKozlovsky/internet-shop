@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { AllProductsContext, CurrentIdContext, CurrentPrice, CurrentSize } from "../App";
+import { CurrentPrice, CurrentSize } from "../App";
 import style from "./Product.module.css";
+import { useParams } from "react-router-dom";
 
 export default function Product() {
-  const { currentProductId } = React.useContext(CurrentIdContext);
-  const { allProducts } = React.useContext(AllProductsContext);
   const { currentPrice } = React.useContext(CurrentPrice);
   const { setCurrentSize } = React.useContext(CurrentSize);
   const [currentProduct, setCurrentProduct] = React.useState([]);
@@ -15,11 +14,17 @@ export default function Product() {
     setCurrentSize(id);
   }
 
+  let params = useParams();
+
   useEffect(() => {
-    fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${currentProductId}`)
+    fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
       .then((response) => response.json())
       .then((response) => setCurrentProduct(response));
-  }, []);
+  }, [params.id]);
+
+  if (!currentProduct) {
+    return "loading...";
+  }
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function Product() {
           <div className={style.product_description}>
             <h1>{currentProduct.title}</h1>
             {currentProduct.size?.map((item) => (
-              <span onClick={() => selectSize(item)} key={allProducts.id} className={style.product_size}>
+              <span onClick={() => selectSize(item)} key={item} className={style.product_size}>
                 {item}
               </span>
             ))}

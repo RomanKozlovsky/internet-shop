@@ -1,11 +1,10 @@
-import { AllProductsContext, CurrentIdContext, CurrentPrice } from "../App";
+import { AllProductsContext, CurrentPrice } from "../App";
 import style from "./Clothes.module.css";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Clothes() {
   const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
-  const { setCurrentProductId } = React.useContext(CurrentIdContext);
   const { currentPrice } = React.useContext(CurrentPrice);
   const USD = [];
 
@@ -28,7 +27,7 @@ export default function Clothes() {
       })
       .then((res) => res.json())
       .then((res) => (currentPrice === "UAH" ? setAllProducts(res) : priceConverter(res)))
-      .catch((e) => alert("Помилка отримання даних з серверу"));
+      .catch((e) => alert("data error"));
   }, []);
 
   return (
@@ -37,7 +36,7 @@ export default function Clothes() {
         {allProducts.map((item) => (
           <div className={style.clothes_items} key={item.id}>
             <div className={style.clothes_item}>
-              <Link onClick={() => setCurrentProductId(item.id)} className={style.clothes_link} to={`product`}>
+              <Link className={style.clothes_link} to={`${item.id}`}>
                 <img src={item.imageUrl} alt="image clothes" />
                 <p>{item.title.toUpperCase()}</p>
                 <p>{currentPrice === "UAH" ? <b>{item.price} UAH</b> : <b>{(item.price / 38).toFixed(2)} USD</b>}</p>

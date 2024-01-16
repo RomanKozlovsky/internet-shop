@@ -17,13 +17,14 @@
 .left_item img {
   width: 200px;
 }
-.right_items ul li {
+.right_items ul li, .right_items a {
   cursor: pointer;
   color: rgb(92, 92, 92);
   font-size: 1.1em;
   display: inline-flex;
   margin-left: 30px;
   list-style: none;
+  text-decoration: none;
 }
 ul li:hover {
   color: black;

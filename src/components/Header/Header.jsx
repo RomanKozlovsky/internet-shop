@@ -27,7 +27,9 @@ export default function Header() {
           </div>
           <div className={style.right_items}>
             <ul>
-              <li>+380 99 041 10 13</li>
+              <li>
+                <a href="tel:+380 99 041 10 13">+380 99 041 10 13</a>
+              </li>
               <li>
                 <FontAwesomeIcon icon={faUser} />
               </li>
