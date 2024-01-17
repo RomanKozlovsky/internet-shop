@@ -2,17 +2,10 @@ import { AllProductsContext, CurrentPrice } from "../App";
 import style from "./Clothes.module.css";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useStore } from "../contexts/all-products-context";
 
 export default function Clothes() {
   const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
-  const { currentPrice } = React.useContext(CurrentPrice);
-  const USD = [];
-
-  function priceConverter(res) {
-    res.forEach((element) => {
-      USD.push((element.price / 38).toFixed(2));
-    });
-  }
 
   useEffect(() => {
     fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
@@ -26,7 +19,7 @@ export default function Clothes() {
         }
       })
       .then((res) => res.json())
-      .then((res) => (currentPrice === "UAH" ? setAllProducts(res) : priceConverter(res)))
+      .then((res) => setAllProducts(res))
       .catch((e) => alert("data error"));
   }, []);
 
@@ -39,7 +32,7 @@ export default function Clothes() {
               <Link className={style.clothes_link} to={`${item.id}`}>
                 <img src={item.imageUrl} alt="image clothes" />
                 <p>{item.title.toUpperCase()}</p>
-                <p>{currentPrice === "UAH" ? <b>{item.price} UAH</b> : <b>{(item.price / 38).toFixed(2)} USD</b>}</p>
+                <p>{item.price}</p>
               </Link>
             </div>
           </div>
