@@ -1,7 +1,6 @@
 import style from "./Clothes.module.css";
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { useStore } from "../contexts/GlobalContext";
 
 export default function Clothes() {

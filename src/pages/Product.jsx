@@ -1,26 +1,29 @@
 import React, { useEffect } from "react";
-import { CurrentPrice, CurrentSize } from "../App";
-import style from "./Product.module.css";
-import { useParams } from "react-router-dom";
+// import { CurrentPrice, CurrentSize } from "../App";
+// import style from "./Product.module.css";
+// import { useParams } from "react-router-dom";
+import { useStore } from "../contexts/GlobalContext";
 
 export default function Product() {
-  const { currentPrice } = React.useContext(CurrentPrice);
-  const { setCurrentSize } = React.useContext(CurrentSize);
-  const [currentProduct, setCurrentProduct] = React.useState([]);
-  const [countProduct, setCountProduct] = React.useState(1);
-  const currentImg = currentProduct.imageUrl;
+  const { currentProduct } = useStore();
 
-  function selectSize(id) {
-    setCurrentSize(id);
-  }
+  // const { currentPrice } = React.useContext(CurrentPrice);
+  // const { setCurrentSize } = React.useContext(CurrentSize);
+  // // const [currentProduct, setCurrentProduct] = React.useState([]);
+  // const [countProduct, setCountProduct] = React.useState(1);
+  // const currentImg = currentProduct.imageUrl;
 
-  let params = useParams();
+  // function selectSize(id) {
+  //   setCurrentSize(id);
+  // }
 
-  useEffect(() => {
-    fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
-      .then((response) => response.json())
-      .then((response) => setCurrentProduct(response));
-  }, [params.id]);
+  // let params = useParams();
+
+  // useEffect(() => {
+  //   fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
+  //     .then((response) => response.json())
+  //     .then((response) => setCurrentProduct(response));
+  // }, [params.id]);
 
   if (!currentProduct) {
     return "loading...";
@@ -28,7 +31,7 @@ export default function Product() {
 
   return (
     <>
-      <div className={style.product_wrapper}>
+      {/* <div className={style.product_wrapper}>
         <div className={style.product_item}>
           <img src={currentImg} alt={`${currentProduct.title}`} />
           <div className={style.product_description}>
@@ -53,7 +56,7 @@ export default function Product() {
             <button className={style.addToCart}>Add to cart</button>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
