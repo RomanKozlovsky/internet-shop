@@ -6,7 +6,7 @@ import NotFound from "./pages/NotFound";
 import Clothes from "./pages/Clothes";
 import React from "react";
 import Product from "./pages/Product";
-import { GlobalProviders } from "./contexts/all-products-context";
+import { GlobalProviders } from "./contexts/GlobalContext";
 import Test from "./components/test";
 
 export const CurrentIdContext = React.createContext();

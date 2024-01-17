@@ -1,10 +1,10 @@
 import React from "react";
-import useGetAllProducts from "../hooks/get-all-products";
+import useAllProducts from "../hooks/useAllProducts";
 
 const GlobalContext = React.createContext({});
 
 export function GlobalProviders({ children }) {
-  const allProducts = useGetAllProducts();
+  const allProducts = useAllProducts();
   const store = {
     allProducts,
   };

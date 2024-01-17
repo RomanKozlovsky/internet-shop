@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore } from "../contexts/all-products-context";
+import { useStore } from "../contexts/GlobalContext";
 
 export default function Test() {
   const { allProducts } = useStore();

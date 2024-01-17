@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 
-export default function useGetAllProducts() {
+export default function useAllProducts() {
   const [allProducts, setAllProducts] = React.useState([]);
 
   useEffect(() => {

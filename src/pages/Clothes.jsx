@@ -1,27 +1,11 @@
-import { AllProductsContext, CurrentPrice } from "../App";
 import style from "./Clothes.module.css";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useStore } from "../contexts/all-products-context";
+
+import { useStore } from "../contexts/GlobalContext";
 
 export default function Clothes() {
-  const { allProducts, setAllProducts } = React.useContext(AllProductsContext);
-
-  useEffect(() => {
-    fetch("https://659a8ae0652b843dea53af1f.mockapi.io/items")
-      .then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-          return res;
-        } else {
-          let error = new Error(res.statusText);
-          error.response = res;
-          throw error;
-        }
-      })
-      .then((res) => res.json())
-      .then((res) => setAllProducts(res))
-      .catch((e) => alert("data error"));
-  }, []);
+  const { allProducts } = useStore();
 
   return (
     <>
