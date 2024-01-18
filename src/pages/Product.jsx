@@ -1,27 +1,15 @@
-import React, { useEffect } from "react";
-import { CurrentPrice } from "../App";
+import React from "react";
 import style from "./Product.module.css";
 import { useParams } from "react-router-dom";
 import { useStore } from "../contexts/GlobalContext";
 
 export default function Product() {
   const { currentProduct } = useStore();
-
-  const { currentPrice } = React.useContext(CurrentPrice);
   const [countProduct, setCountProduct] = React.useState(1);
   const currentImg = currentProduct.currentProduct.imageUrl;
 
   let params = useParams();
-
-  useEffect(() => {
-    fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
-      .then((response) => response.json())
-      .then((response) => currentProduct.setCurrentProduct(response));
-  }, [params.id]);
-
-  if (!currentProduct.currentProduct) {
-    return "loading...";
-  }
+  currentProduct.setProductId(params.id);
 
   return (
     <>
@@ -35,13 +23,7 @@ export default function Product() {
                 {item}
               </span>
             ))}
-            <p>
-              {currentPrice === "UAH" ? (
-                <b>{currentProduct.currentProduct.price * countProduct} UAH</b>
-              ) : (
-                <b>{((currentProduct.currentProduct.price / 38) * countProduct).toFixed(2)} USD</b>
-              )}
-            </p>
+            <p>{currentProduct.currentProduct.price}</p>
             <div className={style.countProductBlock}>
               <div onClick={() => setCountProduct(countProduct - 1)} className={style.countProduct_btn}>
                 -
