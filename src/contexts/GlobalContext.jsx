@@ -6,10 +6,10 @@ const GlobalContext = React.createContext({});
 
 export function GlobalProviders({ children }) {
   const allProducts = useAllProducts();
-  const currentProduct = useCurrentProduct();
+  const oneProduct = useCurrentProduct();
   const store = {
     allProducts,
-    currentProduct,
+    oneProduct,
   };
   return <GlobalContext.Provider value={store}>{children}</GlobalContext.Provider>;
 }
