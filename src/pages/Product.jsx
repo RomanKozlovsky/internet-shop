@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useStore } from "../contexts/GlobalContext";
 import { Dialog } from "@headlessui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Product() {
   const [countProduct, setCountProduct] = React.useState(1);
@@ -50,17 +52,29 @@ export default function Product() {
                   <Dialog.Title>Кошик</Dialog.Title>
                   <div className={style.cart_wrapper}>
                     {cart.cartData.map((index) => (
-                      <div className={style.cart_product_block}>
+                      <div key={index.id} className={style.cart_product_block}>
                         <img src={index.imageUrl} alt="" className={style.popup_img} />
                         <div className={style.cart_product_info}>
-                          <p>{index.title}</p>
-                          <p>{index.price}</p>
-                          <p>{index.size}</p>
-                          <p>{index.id}</p>
+                          <ul>
+                            <li>{index.title}</li>
+                            <li>{index.price}</li>
+                            <li>{index.size}</li>
+                          </ul>
+                          <p onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>
+                            <FontAwesomeIcon icon={faTrash} />
+                          </p>
                         </div>
-                        <button onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>delete</button>
                       </div>
                     ))}
+                    <hr />
+                    <div className={style.modal_footer}>
+                      <p>До сплати:</p>
+                      <p>
+                        {cart.cartData.map((price) => (
+                          <p>{price.price}</p>
+                        ))}
+                      </p>
+                    </div>
                   </div>
                   <button onClick={() => modal.setIsOpenModal(false)}>Close Cart</button>
                 </Dialog.Panel>
