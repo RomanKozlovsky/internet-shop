@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useStore } from "../../contexts/GlobalContext";
 
 export default function Header() {
+  const { modal } = useStore();
+
   return (
     <div className={style.header_wrapper}>
       <div className={style.header_body}>
@@ -23,7 +26,7 @@ export default function Header() {
               <li>
                 <FontAwesomeIcon icon={faUser} />
               </li>
-              <li>
+              <li onClick={() => modal.setIsOpenModal(true)}>
                 <FontAwesomeIcon icon={faCartShopping} />
               </li>
               <li>UAH</li>

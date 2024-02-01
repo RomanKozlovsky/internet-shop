@@ -7,10 +7,9 @@ import { Dialog } from "@headlessui/react";
 
 export default function Product() {
   const [countProduct, setCountProduct] = React.useState(1);
-  const [isOpenModal, setIsOpenModal] = React.useState(false);
   let params = useParams();
 
-  const { oneProduct } = useStore();
+  const { oneProduct, modal, cart } = useStore();
 
   useEffect(() => {
     fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
@@ -42,15 +41,28 @@ export default function Product() {
                 +
               </div>
             </div>
-            <button onClick={() => setIsOpenModal(true)} className={style.addToCart}>
+            <button onClick={() => (cart.setCartData([...cart.cartData, oneProduct.product]), modal.setIsOpenModal(true))} className={style.addToCart}>
               Add to cart
             </button>
-            <Dialog open={isOpenModal} onClose={() => setIsOpenModal(false)}>
+            <Dialog open={modal.isOpenModal} onClose={() => modal.setIsOpenModal(false)}>
               <div className={style.modal_bg}>
                 <Dialog.Panel className={style.popup}>
-                  <Dialog.Title>Cart</Dialog.Title>
-                  <p>Lorem ipsum dolor</p>
-                  <button onClick={() => setIsOpenModal(false)}>Close Cart</button>
+                  <Dialog.Title>Кошик</Dialog.Title>
+                  <div className={style.cart_wrapper}>
+                    {cart.cartData.map((index) => (
+                      <div className={style.cart_product_block}>
+                        <img src={index.imageUrl} alt="" className={style.popup_img} />
+                        <div className={style.cart_product_info}>
+                          <p>{index.title}</p>
+                          <p>{index.price}</p>
+                          <p>{index.size}</p>
+                          <p>{index.id}</p>
+                        </div>
+                        <button onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>delete</button>
+                      </div>
+                    ))}
+                  </div>
+                  <button onClick={() => modal.setIsOpenModal(false)}>Close Cart</button>
                 </Dialog.Panel>
               </div>
             </Dialog>
