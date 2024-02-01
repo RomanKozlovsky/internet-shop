@@ -3,12 +3,15 @@ import style from "./Product.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useStore } from "../contexts/GlobalContext";
+import { Dialog } from "@headlessui/react";
 
 export default function Product() {
   const [countProduct, setCountProduct] = React.useState(1);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
   let params = useParams();
 
   const { oneProduct } = useStore();
+
   useEffect(() => {
     fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
       .then((response) => response.json())
@@ -39,7 +42,18 @@ export default function Product() {
                 +
               </div>
             </div>
-            <button className={style.addToCart}>Add to cart</button>
+            <button onClick={() => setIsOpenModal(true)} className={style.addToCart}>
+              Add to cart
+            </button>
+            <Dialog open={isOpenModal} onClose={() => setIsOpenModal(false)}>
+              <div className={style.modal_bg}>
+                <Dialog.Panel className={style.popup}>
+                  <Dialog.Title>Cart</Dialog.Title>
+                  <p>Lorem ipsum dolor</p>
+                  <button onClick={() => setIsOpenModal(false)}>Close Cart</button>
+                </Dialog.Panel>
+              </div>
+            </Dialog>
           </div>
         </div>
       </div>
