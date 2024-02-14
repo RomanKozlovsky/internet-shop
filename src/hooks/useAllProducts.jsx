@@ -18,7 +18,7 @@ export default function useAllProducts() {
       .then((res) => res.json())
       .then((res) => setAllProducts(res))
       .catch((e) => alert("data error"));
-  }, []);
+  },[]);
 
   return allProducts;
 }

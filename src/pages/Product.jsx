@@ -8,10 +8,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Product() {
+  const { oneProduct, modal, cart } = useStore();
+
   const [countProduct, setCountProduct] = React.useState(1);
+  const priceSum = [];
   let params = useParams();
 
-  const { oneProduct, modal, cart } = useStore();
+  function sumPrice(array) {
+    if (array.length === 0) {
+      return 0;
+    }
+    const sumPrice = array.reduce(function (accumulator, currentValue) {
+      return accumulator + currentValue;
+    });
+    return sumPrice;
+  }
 
   useEffect(() => {
     fetch(`https://659a8ae0652b843dea53af1f.mockapi.io/items/${params.id}`)
@@ -53,7 +64,7 @@ export default function Product() {
                   <div className={style.cart_wrapper}>
                     {cart.cartData.map((index) => (
                       <div key={index.id} className={style.cart_product_block}>
-                        <img src={index.imageUrl} alt="" className={style.popup_img} />
+                        <img src={index.imageUrl} alt="product_image" className={style.popup_img} />
                         <div className={style.cart_product_info}>
                           <ul>
                             <li>{index.title}</li>
@@ -69,11 +80,8 @@ export default function Product() {
                     <hr />
                     <div className={style.modal_footer}>
                       <p>До сплати:</p>
-                      <p>
-                        {cart.cartData.map((price) => (
-                          <p>{price.price}</p>
-                        ))}
-                      </p>
+                      {cart.cartData.map((price) => priceSum.push(price.price))}
+                      <p>{sumPrice(priceSum)}</p>
                     </div>
                   </div>
                   <button onClick={() => modal.setIsOpenModal(false)}>Close Cart</button>

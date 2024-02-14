@@ -1,25 +1,28 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Clothes from "./pages/Clothes";
-import React from "react";
-import Product from "./pages/Product";
+import React, { Suspense, lazy } from "react";
 import { GlobalProviders } from "./contexts/GlobalContext";
+import { Circles } from "react-loader-spinner";
+const Layout = lazy(() => import("./components/Layout/Layout"));
+const Home = lazy(() => import("./pages/Home"));
+const Clothes = lazy(() => import("./pages/Clothes"));
+const Product = lazy(() => import("./pages/Product"));
 
 export default function App() {
   return (
     <div className="App">
       <GlobalProviders>
-        <Routes>
-          <Route path="" element={<Layout />}>
-            <Route path="" element={<Home />} />
-            <Route path="/clothes" element={<Clothes />} />
-            <Route path={`/clothes/:id`} element={<Product />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={<Circles height="80" width="80" color="#4fa94d" ariaLabel="circles-loading" wrapperStyle={{}} wrapperClass="" visible={true} />}>
+          <Routes>
+            <Route path="" element={<Layout />}>
+              <Route path="" element={<Home />} />
+              <Route path="/clothes" element={<Clothes />} />
+              <Route path={`/clothes/:id`} element={<Product />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </GlobalProviders>
     </div>
   );
