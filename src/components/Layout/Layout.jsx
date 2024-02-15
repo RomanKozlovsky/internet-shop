@@ -3,10 +3,12 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import banner from "../../assets/img/banner.png";
+import CartModal from "../CartModal/CartModal";
 
 export default function Layout() {
   return (
     <div className={style.wrapper}>
+      <CartModal />
       <header className={style.header}>
         <Header />
       </header>
