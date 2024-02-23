@@ -6,7 +6,6 @@ import { useStore } from "../../contexts/GlobalContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function CartModal() {
   const portal = document.getElementById("portal");
   const { modal, cart } = useStore();
@@ -36,7 +35,7 @@ export default function CartModal() {
                     <li>{index.price}</li>
                     <li>{index.size}</li>
                   </ul>
-                  <p onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>
+                  <p className={style.FontAwesomeIcon} onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>
                     <FontAwesomeIcon icon={faTrash} />
                   </p>
                 </div>

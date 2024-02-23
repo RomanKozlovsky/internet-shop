@@ -8,6 +8,7 @@ export default function Product() {
   const { oneProduct, modal, cart } = useStore();
   const [countProduct, setCountProduct] = React.useState(1);
   const [currentSize, setCurrentSize] = React.useState("");
+  const [choiseSize, setChoiseSize] = React.useState(false);
   let params = useParams();
 
   useEffect(() => {
@@ -18,6 +19,41 @@ export default function Product() {
 
   const currentImg = oneProduct.product.imageUrl;
 
+  function setSize(item) {
+    console.log(item);
+    setCurrentSize(item);
+    setChoiseSize(!choiseSize);
+  }
+
+
+  function pushCart(array, id) {
+    if (!array.length) {
+      cart.setCartData([...cart.cartData,
+      {
+        id: oneProduct.product.id,
+        image: oneProduct.product.imageUrl,
+        title: oneProduct.product.title,
+        price: oneProduct.product.price,
+        size: currentSize,
+      },
+      ])
+    } else {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].id != id) {
+          cart.setCartData([...cart.cartData,
+          {
+            id: oneProduct.product.id,
+            image: oneProduct.product.imageUrl,
+            title: oneProduct.product.title,
+            price: oneProduct.product.price,
+            size: currentSize,
+          },
+          ])
+        } else cart.setCartData(cart.cartData);
+      }
+    }
+  }
+
   return (
     <>
       <div className={style.product_wrapper}>
@@ -26,35 +62,49 @@ export default function Product() {
           <div className={style.product_description}>
             <h1>{oneProduct.product.title}</h1>
             {oneProduct.product.size?.map((item) => (
-              <span onClick={() => setCurrentSize(item)} key={item} className={style.product_size}>
+              <span
+                className={
+                  choiseSize ? style.product_size_active : style.product_size
+                }
+                onClick={() => {
+                  setSize(item);
+                }}
+                key={item}
+              >
                 {item}
               </span>
             ))}
             <p>{oneProduct.product.price}</p>
             <div className={style.countProductBlock}>
-              <div onClick={() => setCountProduct(countProduct - 1)} className={style.countProduct_btn}>
+              <div
+                onClick={() => setCountProduct(countProduct - 1)}
+                className={style.countProduct_btn}
+              >
                 -
               </div>
-              <div className={style.countProduct_counter}>{countProduct < 1 ? setCountProduct(1) : countProduct}</div>
-              <div onClick={() => setCountProduct(countProduct + 1)} className={style.countProduct_btn}>
+              <div className={style.countProduct_counter}>
+                {countProduct < 1 ? setCountProduct(1) : countProduct}
+              </div>
+              <div
+                onClick={() => setCountProduct(countProduct + 1)}
+                className={style.countProduct_btn}
+              >
                 +
               </div>
             </div>
             <button
-              onClick={() => (
-                cart.setCartData([
-                  ...cart.cartData,
-                  { title: oneProduct.product.title, price: oneProduct.product.price, image: oneProduct.product.imageUrl, size: currentSize },
-                ]),
+              disabled={!choiseSize}
+              onClick={() => (pushCart(cart.cartData, oneProduct.product.id),
                 modal.setIsOpenModal(true)
               )}
               className={style.addToCart}
             >
               Add to cart
             </button>
+            {console.log(cart.cartData)}
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }
