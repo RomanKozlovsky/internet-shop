@@ -13,7 +13,21 @@ export default function App() {
   return (
     <div className="App">
       <GlobalProviders>
-        <Suspense fallback={<Circles height="80" width="80" color="#4fa94d" ariaLabel="circles-loading" wrapperStyle={{}} wrapperClass="" visible={true} />}>
+        <Suspense
+          fallback={
+            <Circles
+              top="50%"
+              left="50%"
+              height="100"
+              width="100"
+              color="#4fa94d"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          }
+        >
           <Routes>
             <Route path="" element={<Layout />}>
               <Route path="" element={<Home />} />

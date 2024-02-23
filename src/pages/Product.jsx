@@ -20,7 +20,6 @@ export default function Product() {
   const currentImg = oneProduct.product.imageUrl;
 
   function setSize(item) {
-    console.log(item);
     setCurrentSize(item);
     setChoiseSize(!choiseSize);
   }
@@ -64,7 +63,7 @@ export default function Product() {
             {oneProduct.product.size?.map((item) => (
               <span
                 className={
-                  choiseSize ? style.product_size_active : style.product_size
+                  currentSize ==  item ? style.product_size_active : style.product_size
                 }
                 onClick={() => {
                   setSize(item);
@@ -101,7 +100,6 @@ export default function Product() {
             >
               Add to cart
             </button>
-            {console.log(cart.cartData)}
           </div>
         </div>
       </div >
