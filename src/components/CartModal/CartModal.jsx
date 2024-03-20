@@ -10,12 +10,13 @@ export default function CartModal() {
   const portal = document.getElementById("portal");
   const { modal, cart } = useStore();
   const priceSum = [];
+
   function sumPrice(array) {
     if (array.length === 0) {
-      return 0;
+      return array;
     }
     const sumPrice = array.reduce(function (accumulator, currentValue) {
-      return accumulator + currentValue;
+      return accumulator + (currentValue);
     });
     return sumPrice;
   }
@@ -35,6 +36,7 @@ export default function CartModal() {
                     <li>{index.price}</li>
                     <li>{index.size}</li>
                   </ul>
+                  <p>Кількість: {index.count}</p>
                   <p className={style.FontAwesomeIcon} onClick={() => cart.setCartData(cart.cartData.filter((i) => i.id !== index.id))}>
                     <FontAwesomeIcon icon={faTrash} />
                   </p>
@@ -42,16 +44,13 @@ export default function CartModal() {
               </div>
             ))}
             <hr />
+            {cart.cartData.map((price) => priceSum.push(price.price))}
             <div className={style.modal_footer}>
-              <p>До сплати:</p>
-              {cart.cartData.map((price) => priceSum.push(price.price))}
-              <p>{sumPrice(priceSum)} грн</p>
+              <p>Разом до сплати: {sumPrice(priceSum)} грн </p>
             </div>
           </div>
           <div className={style.modal_footer}>
-            <button className={style.modal_btn} onClick={() => modal.setIsOpenModal(false)}>
-              Продовжити покупки
-            </button>
+            <button className={style.modal_btn} onClick={() => modal.setIsOpenModal(false)}>Продовжити покупки</button>
             <button className={style.modal_btn}>Оформити замовлення</button>
           </div>
         </Dialog.Panel>

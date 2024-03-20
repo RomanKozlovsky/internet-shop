@@ -7,7 +7,7 @@ import { useStore } from "../contexts/GlobalContext";
 export default function Product() {
   const { oneProduct, modal, cart } = useStore();
   const [countProduct, setCountProduct] = React.useState(1);
-  const [currentSize, setCurrentSize] = React.useState("");
+  const [currentSize, setCurrentSize] = React.useState('');
   const [choiseSize, setChoiseSize] = React.useState(false);
   let params = useParams();
 
@@ -32,8 +32,9 @@ export default function Product() {
         id: oneProduct.product.id,
         image: oneProduct.product.imageUrl,
         title: oneProduct.product.title,
-        price: oneProduct.product.price,
+        price: (oneProduct.product.price * countProduct),
         size: currentSize,
+        count: countProduct,
       },
       ])
     } else {
@@ -44,8 +45,9 @@ export default function Product() {
             id: oneProduct.product.id,
             image: oneProduct.product.imageUrl,
             title: oneProduct.product.title,
-            price: oneProduct.product.price,
+            price: (oneProduct.product.price * countProduct),
             size: currentSize,
+            count: countProduct,
           },
           ])
         } else cart.setCartData(cart.cartData);
@@ -63,7 +65,7 @@ export default function Product() {
             {oneProduct.product.size?.map((item) => (
               <span
                 className={
-                  currentSize ==  item ? style.product_size_active : style.product_size
+                  currentSize == item ? style.product_size_active : style.product_size
                 }
                 onClick={() => {
                   setSize(item);
@@ -92,13 +94,13 @@ export default function Product() {
               </div>
             </div>
             <button
-              disabled={!choiseSize}
+              disabled={!currentSize}
               onClick={() => (pushCart(cart.cartData, oneProduct.product.id),
                 modal.setIsOpenModal(true)
               )}
               className={style.addToCart}
             >
-              Add to cart
+              Add to cartddd
             </button>
           </div>
         </div>
